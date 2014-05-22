@@ -154,8 +154,11 @@ Implements the [health](http://www.consul.io/docs/agent/http.html#toc_24) endpoi
 
  - node(node, callback)
  - checks(serviceName, callback)
- - service(serviceName, callback)
+ - service(serviceName, opts, callback)
  - state(state, callback)
+
+The opts parameter can be used for filtering. Set it to ``{passing: 1}`` to add a query parameter to the request,
+which causes the Consul HTTP API to only return service nodes with passing checks.
 
 ## Running tests
 
@@ -168,4 +171,4 @@ Start the agent using:
 $ consul agent -config-dir=./test/config/consul.d
 ```
 
-Then execute the tests using ``npm test```.
+Then execute the tests using ``npm test``.
