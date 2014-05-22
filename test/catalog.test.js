@@ -14,27 +14,16 @@ describe('consul.catalog', function () {
         it('lists the nodes in a given service', function (done) {
             consul.catalog.service('testservice', function (err, nodes) {
                 if (err) return done(err);
-                nodes.should.be.instanceof(Array);
-                nodes.length.should.equal(1);
-                nodes[0].should.eql({ node: 'api-node1',
-                    address: '127.0.0.1',
-                    serviceId: 'testservice',
-                    serviceName: 'testservice',
-                    serviceTags: [ 'node' ],
-                    servicePort: 80 });
-                done();
+
+                nodes.should.be.instanceOf(Array);
+                nodes.length.should.equal(2);
+                nodes[0].should.have.property('Node');
+                nodes[0].should.have.property('Address');
+                nodes[0].should.have.property('ServiceID');
+                nodes[0].should.have.property('ServiceName');
+
+                return done();
             });
         });
     });
-
-//    describe('#peers', function () {
-//        it('gets all the peer hosts', function (done) {
-//            consul.status.peers(function (err, hosts) {
-//                if (err) return done(err);
-//                hosts.should.be.instanceof(Array);
-//                hosts.should.include('127.0.0.1:8300');
-//                done();
-//            });
-//        });
-//    });
 });
